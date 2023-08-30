@@ -7,3 +7,6 @@
 3-listfiles: lists the files of the current working directory in long format.
 
 4-listmorefiles: lists the files and hidden files in the current working directory using long format.
+
+5-listfilesdigitonly: lists the files and hidden files in the current working directory usign long format with numeric digits.
+
