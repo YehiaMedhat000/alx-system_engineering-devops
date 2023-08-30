@@ -15,3 +15,5 @@
 7-movethatfile: moves the betty dir to the my_first_directory dir
 
 8-firstdelte: deletes the betty dir
+
+9-firstdirdeletion: delets the my_first_directory dir
