@@ -17,3 +17,5 @@
 8-firstdelte: deletes the betty dir
 
 9-firstdirdeletion: delets the my_first_directory dir
+
+10-back: changes directory to the previous one
