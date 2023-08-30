@@ -11,3 +11,5 @@
 5-listfilesdigitonly: lists the files and hidden files in the current working directory usign long format with numeric digits.
 
 6-firstdirectory: makes a directory in the /tmp directory called my_first_directory
+
+7-movethatfile: moves the betty dir to the my_first_directory dir
