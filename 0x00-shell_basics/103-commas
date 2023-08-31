@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(ls -maF) $'\n'
+echo $(ls -maFv) $'\n'
