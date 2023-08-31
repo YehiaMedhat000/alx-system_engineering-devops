@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(ls -maFv) $'\n'
+echo $(ls -maFv --group-directories-first) $'\n'
