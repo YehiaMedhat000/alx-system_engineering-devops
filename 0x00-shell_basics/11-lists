@@ -1,2 +1,2 @@
 #!/bin/bash
-ls $(pwd); ls $(dirname $(pwd)); ls /boot -al
+ls $(pwd) $(dirname $(pwd)) /boot -al
