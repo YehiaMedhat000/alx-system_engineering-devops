@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 # Prints number from 1-20 with some phrases
 HOURS=0
-MINS=0
-while [ $HOURS -le 12 ] || [ $MINS -le 59 ]; do
-	if [ $((MINS % 60)) -eq 0 ]; then
-		echo "Hour: $HOURS"
-		HOURS=$(( HOURS + 1 ))
-		MINS=0
-	fi
-	echo $MINS
-	MINS=$(( MINS + 1 ))
+while [ $HOURS -le 12 ]; do
+	echo "Hour: $HOURS"
+	MINS=1
+	while [ $MINS -le 59 ]; do
+		echo $MINS
+		MINS=$(( MINS + 1 ))
+	done
+	HOURS=$(( HOURS + 1 ))
 done;
