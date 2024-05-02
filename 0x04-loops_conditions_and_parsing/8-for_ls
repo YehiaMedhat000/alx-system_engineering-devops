@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# For printing the output of ls formatted somehow
+for file in *; do
+	echo "$file" | cut -d '-' -f2
+done
