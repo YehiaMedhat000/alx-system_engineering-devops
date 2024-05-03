@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Script that finds the pid of bash
+pgrep "bash" -l
