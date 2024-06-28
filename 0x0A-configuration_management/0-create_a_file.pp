@@ -1,4 +1,4 @@
-# This is some comment
+# Creates a file `/tmp/school`, with the following params
 
 file { '/tmp/school':
     ensure  => 'file',
