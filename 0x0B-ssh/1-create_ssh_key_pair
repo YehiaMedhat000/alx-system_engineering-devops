@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Creates an rsa key pair for connection
 
 # Define variables
 KEY_NAME="school"
