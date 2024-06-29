@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Connects to ubuntu through HOST
 
 USER="ubuntu"
 HOST="54.227.128.176"
