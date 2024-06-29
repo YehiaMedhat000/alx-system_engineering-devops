@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 USER="ubuntu"
-HOST="8.8.8.8"
+HOST="54.227.128.176"
 KEY_PATH="~/.ssh/school"
 
 ssh -i $KEY_PATH $USER@$HOST 
