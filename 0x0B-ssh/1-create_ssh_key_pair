@@ -1,4 +1,10 @@
 #!/bin/bash
 # Creates an rsa key pair for connection
 
-ssh-keygen -t rsa -b 4096 -f school -N betty
+# Define variables
+KEY_NAME="school"
+KEY_BITS="4096"
+PASSPHRASE="betty"
+
+# Generate the RSA key pair
+ssh-keygen -t rsa -b ${KEY_BITS} -f ${KEY_NAME} -N ${PASSPHRASE}
