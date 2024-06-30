@@ -2,6 +2,6 @@
 # Connects to ubuntu through HOST
 
 HOST="54.227.128.176"
-KEY_PATH="~/.ssh/school"
+KEY_PATH="$HOME/.ssh/school"
 
-ssh ubuntu@$HOST -i $KEY_PATH 
+ssh ubuntu@$HOST -i "$KEY_PATH"
