@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
 # Connects to ubuntu through HOST
 
-HOST="54.227.128.176"
-KEY_PATH="$HOME/.ssh/school"
-
-ssh ubuntu@"$HOST" -i "$KEY_PATH"
+ssh ubuntu@54.227.128.176 -i ~/.ssh/school
