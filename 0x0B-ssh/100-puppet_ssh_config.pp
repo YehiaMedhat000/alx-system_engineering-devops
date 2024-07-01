@@ -1,6 +1,6 @@
 # Automatically configure ssh using puppet
 
-file { '/etc/ssh/ssh_config'
+file_line { '/etc/ssh/ssh_config':
     ensure => 'present',
     content => "
     Host*
