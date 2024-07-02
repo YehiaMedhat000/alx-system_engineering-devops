@@ -2,7 +2,7 @@
 # Script that installs nginx and configures it
 
 # Installing nginx
-sudo apt-get update -y -qq
+sudo apt-get update -y
 sudo apt-get install nginx -y
 
 
@@ -17,7 +17,7 @@ sudo chmod 755 -R /var/www/
 cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
 
 # Make the `Hello world` page
-echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+echo -e "Hello World!" | sudo dd status=none of=/var/www/html/index.nginx-debian.html
 
 # Start nginx
 sudo service nginx start
