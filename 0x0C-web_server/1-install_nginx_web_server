@@ -1,8 +1,23 @@
 #!/usr/bin/env bash
-# Install the web server 'nginx' on the server
-sudo apt-get update -y
-sudo apt-get upgrade -y
+# Script that installs nginx and configures it
+
+# Installing nginx
+sudo apt-get update -y -qq
 sudo apt-get install nginx -y
-ufw allow 'Nginx HTTP'
-echo "Hello World!" > /var/www/html/index.html
+
+
+# Allowing nginx to bypass the firewall
+sudo ufw allow "Nginx HTTP"
+
+# Giving permissions to deal without sudoing
+sudo chown "$USER:$USER" /var/www/html
+sudo chmod 755 -R /var/www/
+
+# Make a backup of the original page
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+
+# Make the `Hello world` page
+echo -e "Hello World!" | dd status=none of=/var/www/html/index.nginx-debian.html
+
+# Start nginx
 sudo service nginx start
