@@ -12,31 +12,22 @@ fi
 
 # Add the 404 page
 if ! [ -f /var/www/html/404.html ]; then
-    cat > 404.html << EOF
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        Ceci n'est pas une page
-    </body>
-    </html>
-EOF
+    echo "Ceci n'est pas une page" > 404.html
     sudo mv 404.html /var/www/html/
 fi
 
 # Configure nginx to show the page
-if ! [ -f /etc/nginx/sites-available/error_page.conf ]; then
-    cat > error_page.conf << EOF
-error_page 404 /404.html;
-location = /404.html; {
-    root /var/www/html;
-    internal;
-}
+if [ -f /etc/nginx/sites-available/default ]; then
+    cat > error_page << EOF
+        error_page 404 /404.html;
+        location = /404.html {
+            internal;
+        }
+
 EOF
-    sudo mv error_page.conf /etc/nginx/sites-available/
+    export CONFIG=$(cat error_page)
+    rm error_page
+    sudo sed -i "54 a $CONFIG" /etc/nginx/sites-available/default
 fi
 
 sudo service nginx restart
