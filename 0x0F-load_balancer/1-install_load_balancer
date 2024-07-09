@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Install and configure HAproxy on your server
+
+# Install haproxy if not installed
+
+INSTALLED=$(apt list --installed | grep -c haproxy)
+
+if [ $INSTALLED != 1 ]; then
+    sudo apt update -y
+    sudo apt full-upgrade -y
+    sudo apt install haproxy -y
+fi
+
+# Add the required sections for the config file
+if [ -f /etc/haproxy/haproxy.cfg ]; then
+    sudo sed -i '$a\
+frontend mohy.tech\
+        bind 127.0.0.1:80\
+        default_backend mohy_backend\
+\
+backend mohy_backend\
+        balance roundrobin\
+        server 527101-web-01 18.209.152.70\
+        server 527101-web-02 54.226.43.113\
+'
+fi
+
+# Check if the configuration file has any errors
+haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart the haproxy service to let changes take place
+sudo systemctl restart haproxy

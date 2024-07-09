@@ -7,6 +7,7 @@ IS_INSTALLED=$(apt list --installed | grep -c nginx)
 if [ "$IS_INSTALLED" == 0 ]; then
     # Installing nginx
     sudo apt update -y
+    sudo apt full-upgrade -y
     sudo apt install -y nginx
 fi
 
