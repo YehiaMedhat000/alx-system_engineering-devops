@@ -20,9 +20,9 @@ frontend mohy.tech\
 \
 backend mohy_backend\
         balance roundrobin\
-        server 527101-web-01 18.209.152.70\
-        server 527101-web-02 54.226.43.113\
-'
+        server 527101-web-01 18.209.152.70:80\
+        server 527101-web-02 54.226.43.113:80\
+' /etc/haproxy/haproxy.cfg
 fi
 
 # Check if the configuration file has any errors
