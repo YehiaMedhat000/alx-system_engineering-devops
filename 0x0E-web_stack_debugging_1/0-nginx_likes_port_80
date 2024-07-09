@@ -4,7 +4,7 @@
 # Download nginx
 INSTALLED=$(apt list --installed | grep -c "nginx")
 
-if [ $INSTALLED != 1 ]; then
+if [ "$INSTALLED" != 1 ]; then
     sudo apt update -y
     sudo apt full-upgrade -y
     sudo apt install nginx -y
