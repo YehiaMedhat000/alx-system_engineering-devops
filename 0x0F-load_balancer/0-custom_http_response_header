@@ -1,34 +1,71 @@
 #!/usr/bin/env bash
-# configures a new Ubuntu machine
+# Configure a brand new Ubuntu machine to the requirements asked in this task
 
-# Install nginx on web-01 server
-apt-get -y update
-apt-get -y install nginx
+# Check if nginx is already installed or not
+IS_INSTALLED=$(apt list --installed | grep -c nginx)
 
-# Add custom response header to know the server name for debugging
-HOST_NAME=$(hostname)
-HEADER="\\\n\tadd_header X-Served-By $HOST_NAME;\n"
-FIND=$(grep "X-Server-by" /etc/nginx/sites-available/default)
-if [[ -z $FIND ]]; then
-    sed -i "23i $HEADER" /etc/nginx/sites-available/default
+if [ "$IS_INSTALLED" == 0 ]; then
+    # Installing nginx
+    sudo apt update -y
+    sudo apt install -y nginx
 fi
 
-# Create a firts index.html page
-echo "Hello World!" > /var/www/html/index.html
-
-# Add to the nginx configuration file a redirection to another page
-FIND=$(grep "redirect_me" /etc/nginx/sites-available/default)
-STRING="\\\n\tlocation /redirect_me {\n\t\t return 301 https://www.youtube.com/watch?v=3MbaGJN2ioQ;\n\t}\n"
-if [[ -z $FIND ]]; then
-    sed -i "42i $STRING" /etc/nginx/sites-available/default
+# Create redirect page
+chown -R ubuntu /var/www
+if ! [ -f /var/www/html/index.html ]; then
+    cat > index.html << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    Hello World!
+</body>
+</html>
+EOF
+    sudo mv index.html /var/www/html/
 fi
 
-# Add to the nginx configuration file a error page 404
-FIND=$(grep "error_page 404" /etc/nginx/sites-available/default)
-ERROR="\\\n\terror_page 404 /custom_404.html;\n"
-if [[ -z $FIND ]]; then
-    echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-    sed -i "40i $ERROR" /etc/nginx/sites-available/default
+# Add the 404 page
+if ! [ -f /var/www/html/404.html ]; then
+    cat > 404.html << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    Ceci n'est pas une page
+</body>
+</html>
+EOF
+    sudo mv 404.html /var/www/html/
 fi
 
-service nginx restart
+# Configure nginx to show the pages
+if [ -f /etc/nginx/sites-available/default ]; then
+
+    # Configuration for redirect page
+    sudo sed -i '24a\
+        rewrite ^/redirect_me https://github.com/YehiaMedhat000 permanent;' /etc/nginx/sites-available/default
+
+    # Configuration for the 404 NOT FOUND error page
+    sudo sed -i '41a\
+        error_page 404 /404.html;\
+        location = /404.html {\
+            root /var/www/html;\
+            internal;\
+        }\
+' /etc/nginx/sites-available/default
+
+    # Add the upstream backend block
+    sudo sed -i "24a\
+    \\\tadd_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+
+fi
+
+sudo nginx -t
+sudo service nginx restart
