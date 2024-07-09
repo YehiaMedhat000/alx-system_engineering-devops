@@ -3,13 +3,13 @@
 exec { 'Update':
   command  => 'apt update -y',
   user     => 'root',
-  provider => 'bash'
+  provider => 'shell'
 }
 
 -> exec { 'Upgrade':
   command  => 'apt full-update -y',
   user     => 'root',
-  provider => 'bash'
+  provider => 'shell'
 }
 
 -> package { 'nginx':
