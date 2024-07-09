@@ -1,3 +1,5 @@
+# Automate the installation of nginx and configuration
+
 exec { 'Update':
   command  => 'apt update -y',
   user     => 'root',
