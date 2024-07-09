@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Script that debugs the problem for nginx
+
+# Download nginx
+INSTALLED=$(apt list --installed | grep -c "nginx")
+
+if [ $INSTALLED != 1 ]; then
+    sudo apt update -y
+    sudo apt full-upgrade -y
+    sudo apt install nginx -y
+fi
+
+# Starting the nginx service
+sudo service nginx start
