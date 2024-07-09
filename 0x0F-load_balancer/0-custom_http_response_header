@@ -14,16 +14,7 @@ fi
 chown -R ubuntu /var/www
 if ! [ -f /var/www/html/index.html ]; then
     cat > index.html << EOF
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
     Hello World!
-</body>
-</html>
 EOF
     sudo mv index.html /var/www/html/
 fi
@@ -31,16 +22,7 @@ fi
 # Add the 404 page
 if ! [ -f /var/www/html/404.html ]; then
     cat > 404.html << EOF
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
     Ceci n'est pas une page
-</body>
-</html>
 EOF
     sudo mv 404.html /var/www/html/
 fi
