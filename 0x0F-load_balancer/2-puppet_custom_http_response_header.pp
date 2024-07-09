@@ -27,5 +27,5 @@ exec { 'Update':
 -> service { 'Run nginx':
   ensure  => running,
   enable  => true,
-  require => package['nginx']
+  require => Package['nginx']
 }
