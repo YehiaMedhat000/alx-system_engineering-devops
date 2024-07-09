@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script that debugs the problem for nginx
+sudo apt full-upgrade -y
+sudo apt install nginx -y
+sudo service nginx start
