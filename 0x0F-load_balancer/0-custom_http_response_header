@@ -60,6 +60,11 @@ if [ -f /etc/nginx/sites-available/default ]; then
             internal;\
         }\
 ' /etc/nginx/sites-available/default
+
+    # Add the upstream backend block
+    sudo sed -i "24a\
+    \\\tadd_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+
 fi
 
 sudo nginx -t
