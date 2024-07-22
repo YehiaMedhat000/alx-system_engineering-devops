@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Configures the ufw firewall software on a server
+
+INSTALLED=`which ufw | grep -c ufw`
+
+# Install ufw if not
+if ! [ "$INSTALLED" ]; then
+    sudo apt update
+    sudo apt full-upgrade -y
+    sudo apt install ufw
+fi
+
+# Configure ufw
+sudo ufw allow ssh
+sudo ufw allow https
+sudo ufw allow http
+
+sudo ufw enable
